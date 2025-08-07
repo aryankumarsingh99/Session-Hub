@@ -105,7 +105,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br  bg-white flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
@@ -142,7 +142,7 @@ export default function RegisterPage() {
                   name="firstName"
                   value={credentials.firstName}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                  className={`w-full px-3 text-black py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                     errors.firstName ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="John"
@@ -163,7 +163,7 @@ export default function RegisterPage() {
                   name="lastName"
                   value={credentials.lastName}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                  className={`w-full px-3 text-black py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                     errors.lastName ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="Doe"
@@ -186,7 +186,7 @@ export default function RegisterPage() {
                 name="email"
                 value={credentials.email}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                className={`w-full px-3 text-black py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                   errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 placeholder="john.doe@example.com"
@@ -209,7 +209,7 @@ export default function RegisterPage() {
                   name="password"
                   value={credentials.password}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                  className={`w-full px-3 text-black py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                     errors.password ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="At least 6 characters"
@@ -249,10 +249,10 @@ export default function RegisterPage() {
                 name="confirmPassword"
                 value={credentials.confirmPassword}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                className={`w-full px-3 text-black py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                   errors.confirmPassword ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
-                placeholder="Confirm your password"
+                placeholder="*******"
                 disabled={loading}
               />
               {errors.confirmPassword && (

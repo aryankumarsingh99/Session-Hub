@@ -85,7 +85,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br bg-white flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
@@ -121,7 +121,7 @@ export default function LoginPage() {
                 name="email"
                 value={credentials.email}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                className={`w-full px-3 text-black py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                   errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 placeholder="Enter your email"
@@ -144,10 +144,10 @@ export default function LoginPage() {
                   name="password"
                   value={credentials.password}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                  className={`w-full px-3 text-black py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                     errors.password ? 'border-red-500 bg-red-50' : 'border-gray-300'
                   }`}
-                  placeholder="Enter your password"
+                  placeholder="********"
                   disabled={loading}
                 />
                 <button

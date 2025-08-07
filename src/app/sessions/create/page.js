@@ -384,7 +384,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 id="title"
                 value={sessionData.title}
                 onChange={(e) => setSessionData(prev => ({ ...prev, title: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                className={`w-full text-black px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                   errors.title ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 placeholder="Enter a compelling title for your wellness session"
@@ -406,7 +406,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 value={sessionData.description}
                 onChange={(e) => setSessionData(prev => ({ ...prev, description: e.target.value }))}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-vertical"
+                className="w-full px-3 text-black py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-vertical"
                 placeholder="Provide a detailed description of your wellness session..."
                 maxLength={1000}
               />
@@ -448,7 +448,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                   value={tagInput}
                   onChange={handleTagInput}
                   onKeyPress={handleKeyPress}
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                  className="flex-1 px-3 text-black py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                   placeholder="Add tags separated by commas (e.g., meditation, relaxation, mindfulness)"
                   disabled={sessionData.tags.length >= 10}
                 />
@@ -476,7 +476,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 id="json_file_url"
                 value={sessionData.json_file_url}
                 onChange={(e) => setSessionData(prev => ({ ...prev, json_file_url: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                className={`w-full px-3 text-black py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
                   errors.json_file_url ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 placeholder="https://example.com/your-session-data.json"
