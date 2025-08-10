@@ -3,7 +3,7 @@
 A wellness session management platform built with Next.js 15 and MongoDB. Create, manage, and discover meditation, breathing, and mindfulness sessions.
 
 ## 🚀 Live Demo
-🔗  https://session-hub.vercel.app/
+🔗  https://session-hub.vercel.app/  
 
 ## ✨ Features
 - **User Authentication** - JWT-based login/registration
