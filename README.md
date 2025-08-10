@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SessionHub - Wellness Session Management Platform
 
-## Getting Started
+A wellness session management platform built with Next.js 15 and MongoDB. Create, manage, and discover meditation, breathing, and mindfulness sessions.
 
-First, run the development server:
+## 🚀 Live Demo
+🔗  https://session-hub.vercel.app/
 
+## ✨ Features
+- **User Authentication** - JWT-based login/registration
+- **Session Management** - Create, edit, delete wellness sessions
+- **Draft & Publish** - Save drafts or publish publicly
+- **Session Discovery** - Browse and filter sessions
+- **Responsive Design** - Works on all devices
+
+## 🛠️ Tech Stack
+- Next.js 15, React, Tailwind CSS
+- MongoDB Atlas, Mongoose
+- JWT Authentication
+- Deployed on Vercel
+
+## ⚙️ Quick Setup
+
+1. **Clone & Install**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/aryankumarsingh99/Session-Hub.git
+cd Session-Hub
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Environment Variables** - Create `.env.local`:
+```env
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/SessionHub
+JWT_SECRET=your_long_secret_key_here
+NODE_ENV=development
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Run Development Server**
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛣️ API Routes
 
-## Learn More
+### Public Endpoints
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login  
+- `GET /api/sessions` - Get published sessions
 
-To learn more about Next.js, take a look at the following resources:
+### Protected Endpoints (JWT Required)
+- `GET /api/my-sessions` - Get user's sessions
+- `GET /api/my-sessions/[id]` - Get single session
+- `DELETE /api/my-sessions/[id]` - Delete session
+- `POST /api/my-sessions/save-draft` - Save draft
+- `POST /api/my-sessions/publish` - Publish session
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📱 Frontend Pages
+- `/` - Home page
+- `/login` - Authentication
+- `/my-sessions` - Session management
+- `/my-sessions/[id]` - View session
+- `/sessions/create` - Create/edit sessions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧪 Testing Flow
+1. Register/Login → Create Session → Save Draft → View in My Sessions → Edit → Publish → Check Public API
 
-## Deploy on Vercel
+## 🚀 Deploy to Vercel
+1. Connect GitHub repository to Vercel
+2. Add environment variables in Vercel settings
+3. Deploy automatically on push to main
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🐛 Troubleshooting
+- **Build fails**: Remove any `page.js` files from `/api/` directories
+- **Database issues**: Check MongoDB URI and IP whitelist
+- **Auth issues**: Verify JWT_SECRET is set
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👨‍💻 Author
+**Aryan Kumar Singh** - [@aryankumarsingh99](https://github.com/aryankumarsingh99)
+
+---
+Built with ❤️ using Next.js 15
