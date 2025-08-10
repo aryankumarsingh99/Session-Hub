@@ -1,4 +1,4 @@
-// src/app/api/my-sessions/save-draft/route.js
+ 
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Session from '@/models/Session';
@@ -14,8 +14,8 @@ export async function POST(request) {
 
     await dbConnect();
     const body = await request.json();
-    
-    console.log('💾 Save draft request:', { 
+
+    console.log('Save draft request:', { 
       userId: payload.userId, 
       sessionId: body.id || 'new',
       title: body.title || 'Untitled'
@@ -24,12 +24,12 @@ export async function POST(request) {
     let session;
 
     if (body.id) {
-      // Update existing draft
+      
       session = await Session.findOneAndUpdate(
         { 
           _id: body.id, 
           user_id: payload.userId,
-          status: 'draft' // Only allow updating drafts
+          status: 'draft'  
         },
         { 
           ...body,
@@ -38,7 +38,7 @@ export async function POST(request) {
         },
         { 
           new: true, 
-          runValidators: false, // More lenient for drafts
+          runValidators: false, 
           upsert: false
         }
       ).lean();
@@ -50,9 +50,9 @@ export async function POST(request) {
         }, { status: 404 });
       }
 
-      console.log('✅ Draft updated:', session.title);
+      console.log(' Draft updated:', session.title);
     } else {
-      // Create new draft
+ 
       const newSession = new Session({
         ...body,
         user_id: payload.userId,
@@ -61,10 +61,10 @@ export async function POST(request) {
         updated_at: new Date()
       });
 
-      await newSession.save({ validateBeforeSave: false }); // Skip validation for drafts
+      await newSession.save({ validateBeforeSave: false });  
       session = newSession.toObject();
 
-      console.log('✅ New draft created:', session.title);
+      console.log(' New draft created:', session.title);
     }
 
     return NextResponse.json({
@@ -82,9 +82,9 @@ export async function POST(request) {
     });
 
   } catch (error) {
-    console.error('❌ Save Draft Error:', error);
+    console.error('Save Draft Error:', error);
     
-    // For auto-save, return error but don't crash
+    
     return NextResponse.json({
       success: false,
       error: 'Failed to save draft',

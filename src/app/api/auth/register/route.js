@@ -45,14 +45,13 @@ export async function POST(request) {
 
     await user.save();
 
-    // Generate JWT token
+ 
     const token = generateToken({
       userId: user._id.toString(),
       email: user.email,
       role: user.role
     });
-
-    // Prepare user response
+ 
     const userResponse = {
       id: user._id.toString(),
       email: user.email,
@@ -64,7 +63,7 @@ export async function POST(request) {
       updated_at: user.updated_at.toISOString()
     };
 
-    console.log('✅ Register: User created successfully:', user.email);
+    console.log('Register: User created successfully:', user.email);
 
     const response = NextResponse.json({
       success: true,

@@ -13,7 +13,7 @@ export async function GET(request, { params }) {
 
     await dbConnect();
     
-    console.log('🔍 Fetching session:', { sessionId: params.id, userId: payload.userId });
+    console.log(' Fetching session:', { sessionId: params.id, userId: payload.userId });
     
     const session = await Session.findOne({ 
       _id: params.id, 
@@ -21,11 +21,11 @@ export async function GET(request, { params }) {
     }).lean();
     
     if (!session) {
-      console.log('❌ Session not found');
+      console.log(' Session not found');
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 });
     }
 
-    console.log('✅ Session found:', session.title);
+     
 
     return NextResponse.json({
       success: true,
@@ -40,7 +40,7 @@ export async function GET(request, { params }) {
       }
     });
   } catch (error) {
-    console.error('❌ Get Session Error:', error);
+    console.error(' Get Session Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to fetch session' }, { status: 500 });
   }
 }
@@ -55,7 +55,7 @@ export async function DELETE(request, { params }) {
 
     await dbConnect();
     
-    console.log('🗑️ Deleting session:', { sessionId: params.id, userId: payload.userId });
+    console.log(' Deleting session:', { sessionId: params.id, userId: payload.userId });
 
     const session = await Session.findOneAndDelete({
       _id: params.id,
@@ -72,7 +72,7 @@ export async function DELETE(request, { params }) {
     });
 
   } catch (error) {
-    console.error('❌ Delete Session Error:', error);
+    console.error(' Delete Session Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to delete session' }, { status: 500 });
   }
 }

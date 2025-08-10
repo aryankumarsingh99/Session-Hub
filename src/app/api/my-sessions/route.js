@@ -29,7 +29,7 @@ export async function GET(request) {
       sortOrder 
     });
     
-    // Build query
+ 
     const query = { user_id: payload.userId };
     if (status !== 'all') {
       query.status = status;
@@ -37,11 +37,10 @@ export async function GET(request) {
     
     const skip = (page - 1) * limit;
     
-    // Build sort object
+ 
     const sort = {};
     sort[sortBy] = sortOrder;
-    
-    // Fetch sessions with pagination
+ 
     const [sessions, total] = await Promise.all([
       Session.find(query)
         .sort(sort)
@@ -51,7 +50,7 @@ export async function GET(request) {
       Session.countDocuments(query)
     ]);
 
-    console.log(`✅ Found ${sessions.length} user sessions`);
+    console.log(`Found ${sessions.length} user sessions`);
 
     return NextResponse.json({
       success: true,
@@ -79,7 +78,7 @@ export async function GET(request) {
       }
     });
   } catch (error) {
-    console.error('❌ My Sessions Error:', error);
+    console.error(' My Sessions Error:', error);
     return NextResponse.json({ 
       success: false, 
       error: 'Failed to fetch sessions' 
@@ -98,9 +97,9 @@ export async function POST(request) {
     await dbConnect();
     const body = await request.json();
     
-    console.log('📝 Creating new session:', { userId: payload.userId, title: body.title });
+    console.log(' Creating new session:', { userId: payload.userId, title: body.title });
     
-    // Create new session
+   
     const session = new Session({
       ...body,
       user_id: payload.userId,
@@ -111,7 +110,7 @@ export async function POST(request) {
     
     await session.save();
     
-    console.log('✅ Session created successfully:', session._id);
+    console.log(' Session created successfully:', session._id);
     
     return NextResponse.json({
       success: true,
@@ -124,7 +123,7 @@ export async function POST(request) {
       }
     });
   } catch (error) {
-    console.error('❌ Create Session Error:', error);
+    console.error(' Create Session Error:', error);
     return NextResponse.json({ 
       success: false, 
       error: 'Failed to create session' 

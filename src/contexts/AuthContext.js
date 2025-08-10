@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
-        console.log('✅ AuthContext: Login successful');
+        console.log('AuthContext: Login successful');
         return { success: true, message: data.message };
       } else {
         console.log(' AuthContext: Login failed:', data.error);
@@ -133,7 +133,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('user');
       setUser(null);
       
-      console.log('✅ AuthContext: Logout successful');
+      console.log(' AuthContext: Logout successful');
       window.location.href = '/auth/login';
     } catch (error) {
       console.error(' AuthContext: Logout error:', error);

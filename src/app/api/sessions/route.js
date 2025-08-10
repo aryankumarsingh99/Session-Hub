@@ -17,7 +17,7 @@ export async function GET(request) {
     
     console.log('🔍 Fetching public sessions:', { page, limit, category, difficulty, search, sortBy });
     
-    // Build query for published sessions only
+    
     const query = { status: 'published' };
     
     if (category && category !== 'all') {
@@ -38,11 +38,11 @@ export async function GET(request) {
     
     const skip = (page - 1) * limit;
     
-    // Build sort object
+ 
     const sort = {};
     sort[sortBy] = sortOrder;
     
-    // Fetch sessions with pagination
+ 
     const [sessions, total] = await Promise.all([
       Session.find(query)
         .sort(sort)

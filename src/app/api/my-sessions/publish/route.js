@@ -1,4 +1,4 @@
-// src/app/api/my-sessions/publish/route.js
+ 
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Session from '@/models/Session';
