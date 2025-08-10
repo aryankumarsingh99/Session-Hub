@@ -492,7 +492,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
             {/* Last Saved Info */}
             {lastSaved && (
               <div className="text-sm text-gray-500 text-center py-2 bg-gray-50 rounded-lg border">
-                💾 Last saved: {lastSaved.toLocaleString()}
+                 Last saved: {lastSaved.toLocaleString()}
               </div>
             )}
 

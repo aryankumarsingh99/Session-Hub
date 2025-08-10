@@ -214,12 +214,12 @@ function DashboardContent() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-4 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="newest">Newest</option>
-                  <option value="oldest">Oldest</option>
-                  <option value="views">Most Views</option>
-                  <option value="title">Title A-Z</option>
+                  <option className='text-black' value="newest">Newest</option>
+                  <option className='text-black' value="oldest">Oldest</option>
+                  <option className='text-black' value="views">Most Views</option>
+                  <option className='text-black' value="title">Title A-Z</option>
                 </select>
               </div>
             </div>
