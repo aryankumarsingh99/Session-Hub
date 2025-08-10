@@ -1,4 +1,4 @@
-// src/app/my-sessions/page.js
+ 
 'use client';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -58,13 +58,13 @@ function MySessionsContent() {
       const data = await response.json();
       
       if (data.success) {
-        // Update session in state
+        
         setSessions(prev => prev.map(session => 
           session._id === sessionId 
             ? { ...session, status: 'published', published_at: new Date().toISOString() }
             : session
         ));
-        console.log('✅ Session published successfully');
+         
       } else {
         console.error('Failed to publish session:', data.error);
         alert('Failed to publish session: ' + data.error);
@@ -96,7 +96,7 @@ function MySessionsContent() {
       
       if (data.success) {
         setSessions(prev => prev.filter(session => session._id !== sessionId));
-        console.log('✅ Session deleted successfully');
+        
       } else {
         console.error('Failed to delete session:', data.error);
         alert('Failed to delete session: ' + data.error);
@@ -127,7 +127,7 @@ function MySessionsContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+       
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -176,9 +176,9 @@ function MySessionsContent() {
         </div>
       </header>
 
-      {/* Main Content */}
+    
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header Section */}
+    
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">My Sessions</h1>
@@ -195,15 +195,15 @@ function MySessionsContent() {
           </Link>
         </div>
 
-        {/* Stats Cards */}
+     
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <StatsCard title="Total Sessions" value={stats.total} icon="📚" color="blue" />
-          <StatsCard title="Published" value={stats.published} icon="✅" color="green" />
-          <StatsCard title="Drafts" value={stats.drafts} icon="📝" color="yellow" />
-          <StatsCard title="Total Views" value={stats.views.toLocaleString()} icon="👁️" color="purple" />
+          <StatsCard title="Total Sessions" value={stats.total}   color="blue" />
+          <StatsCard title="Published" value={stats.published}  color="green" />
+          <StatsCard title="Drafts" value={stats.drafts}   color="yellow" />
+          <StatsCard title="Total Views" value={stats.views.toLocaleString()}   color="purple" />
         </div>
 
-        {/* Sessions List */}
+        
         <div className="bg-white rounded-lg shadow-sm border">
           <div className="p-6 border-b border-gray-200">
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
@@ -265,7 +265,7 @@ function MySessionsContent() {
   );
 }
 
-// Stats Card Component
+ 
 function StatsCard({ title, value, icon, color }) {
   const colorClasses = {
     blue: 'bg-blue-50 text-blue-600 border-blue-200',
@@ -358,7 +358,7 @@ function MySessionCard({ session, onPublish, onDelete, actionLoading }) {
         )}
       </div>
 
-      {/* Actions */}
+     
       <div className="flex items-center gap-2">
         <button
           onClick={() => router.push(`/sessions/edit/${session._id}`)}

@@ -1,4 +1,4 @@
-// src/models/Session.js
+ 
 import mongoose from 'mongoose';
 
 const SessionSchema = new mongoose.Schema({
@@ -62,7 +62,7 @@ const SessionSchema = new mongoose.Schema({
   }
 });
 
-// Set published_at when status changes to published
+ 
 SessionSchema.pre('save', function(next) {
   if (this.isModified('status') && this.status === 'published' && !this.published_at) {
     this.published_at = new Date();

@@ -1,4 +1,4 @@
-// src/app/sessions/edit/[id]/page.js
+ 
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -19,7 +19,7 @@ export default function SessionEdit() {
   );
 }
 
-// Enhanced Session Editor Component (supports both create and edit)
+ 
 function SessionEditor({ mode = 'create', sessionId = null }) {
   const { user, logout } = useAuth();
   const [sessionData, setSessionData] = useState({
@@ -39,18 +39,18 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
   const [lastSaved, setLastSaved] = useState(null);
   const router = useRouter();
 
-  // Auto-save timer
+ 
   useEffect(() => {
     if (mode === 'edit' || (sessionData.title || sessionData.description)) {
       const timer = setTimeout(() => {
         autoSave();
-      }, 5000); // Auto-save after 5 seconds of inactivity
+      }, 5000);  
 
       return () => clearTimeout(timer);
     }
   }, [sessionData]);
 
-  // Load session data if editing
+  
   useEffect(() => {
     if (mode === 'edit' && sessionId) {
       loadSession();
@@ -145,7 +145,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
   const handleSaveDraft = async () => {
     if (!validateForm()) return;
     
-    // Confirm if converting published session to draft
+ 
     if (originalStatus === 'published') {
       const confirmed = confirm(
         '⚠️ This session is currently published. Saving as draft will unpublish it and make it invisible to other users. Continue?'
@@ -165,7 +165,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
         },
         body: JSON.stringify({
           ...sessionData,
-          status: 'draft', // Force status to draft
+          status: 'draft',  
           sessionId: mode === 'edit' ? sessionId : undefined
         })
       });
@@ -174,11 +174,11 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
       
       if (data.success) {
         setLastSaved(new Date());
-        console.log('✅ Session saved as draft successfully');
+       
         
-        // Show success message for published->draft conversion
+        
         if (originalStatus === 'published') {
-          alert('✅ Session unpublished and saved as draft successfully!');
+          alert(' Session unpublished and saved as draft successfully!');
         }
         
         router.push('/my-sessions');
@@ -216,7 +216,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
       const data = await response.json();
       
       if (data.success) {
-        console.log('✅ Session published successfully');
+        console.log(' Session published successfully');
         router.push('/my-sessions');
       } else {
         setErrors({ submit: data.error });
@@ -229,12 +229,12 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
     }
   };
 
-  // Enhanced tag handling - supports comma-separated input
+  
   const handleTagInput = (e) => {
     const value = e.target.value;
     setTagInput(value);
     
-    // Auto-add tags when user types comma
+ 
     if (value.includes(',')) {
       const newTags = value.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag);
       addMultipleTags(newTags);
@@ -259,7 +259,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
     const input = tagInput.trim();
     if (!input) return;
     
-    // Handle comma-separated tags
+ 
     if (input.includes(',')) {
       const newTags = input.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag);
       addMultipleTags(newTags);
@@ -302,7 +302,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+     
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -351,9 +351,9 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
         </div>
       </header>
 
-      {/* Main Content */}
+ 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
+     
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -368,7 +368,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
               }
             </p>
             
-            {/* Status indicator for edit mode */}
+         
             {mode === 'edit' && (
               <div className="mt-2">
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
@@ -382,7 +382,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
             )}
           </div>
           
-          {/* Auto-save Status */}
+         
           {autoSaveStatus && (
             <div className={`flex items-center text-sm ${
               autoSaveStatus === 'Saved' ? 'text-green-600' : 
@@ -396,7 +396,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
           )}
         </div>
 
-        {/* Alert for Published Session Editing */}
+       
         {mode === 'edit' && originalStatus === 'published' && (
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
             <div className="flex">
@@ -420,7 +420,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
           </div>
         )}
 
-        {/* Form */}
+        
         <div className="bg-white rounded-lg shadow-sm border p-8">
           <form className="space-y-6">
             {/* Submit Error */}
@@ -523,7 +523,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 </button>
               </div>
               <p className="mt-1 text-sm text-gray-500">
-                💡 <strong>Tip:</strong> Type tags separated by commas for quick entry (e.g., "meditation, relaxation, stress relief")
+                 <strong>Tip:</strong> Type tags separated by commas for quick entry (e.g., "meditation, relaxation, stress relief")
               </p>
             </div>
 
@@ -546,14 +546,14 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 <p className="mt-1 text-sm text-red-600">{errors.json_file_url}</p>
               )}
               <p className="mt-1 text-sm text-gray-500">
-                📁 Provide a publicly accessible URL to your session's JSON configuration file
+                Provide a publicly accessible URL to your session's JSON configuration file
               </p>
             </div>
 
             {/* Last Saved Info */}
             {lastSaved && (
               <div className="text-sm text-gray-500 text-center py-2 bg-gray-50 rounded-lg border">
-                💾 Last saved: {lastSaved.toLocaleString()}
+                 Last saved: {lastSaved.toLocaleString()}
               </div>
             )}
 

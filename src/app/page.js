@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100 dark:from-gray-900 dark:via-slate-900 dark:to-zinc-900 relative overflow-hidden" >
-      {/* Animated Background Elements */}
+ 
       <div className="absolute inset-0 overflow-hidden">
         <div 
           className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Hero Section with Staggered Animation */}
+ 
         <div className={`text-center transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 relative">
             <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
@@ -91,7 +91,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Features Section with Hover Effects */}
+ 
         <div className="mt-16 grid md:grid-cols-3 gap-8">
           {[
             {
@@ -147,13 +147,13 @@ export default function Home() {
                 {feature.description}
               </p>
               
-              {/* Hover Effect Overlay */}
+         
               <div className={`absolute inset-0 bg-gradient-to-br from-${feature.color}-500/5 to-purple-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`} />
             </div>
           ))}
         </div>
 
-        {/* Stats Section with Counter Animation */}
+ 
         <div className={`mt-16 bg-white/90 backdrop-blur-sm dark:bg-gray-800/90 rounded-2xl shadow-xl p-8 border border-gray-200/50 dark:border-gray-700/50 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
              style={{ transitionDelay: '1.6s' }}>
           <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">
@@ -184,7 +184,7 @@ export default function Home() {
                   {stat.label}
                 </div>
                 
-                {/* Animated underline */}
+      
                 <div className={`h-0.5 bg-gradient-to-r from-${stat.color}-500 to-purple-500 mx-auto mt-2 transition-all duration-300 w-0 group-hover:w-full`} />
               </div>
             ))}
@@ -195,7 +195,7 @@ export default function Home() {
   );
 }
 
-// Counter Animation Component
+ 
 function CountUpAnimation({ end, suffix = '', duration = 2000, delay = 0 }) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);

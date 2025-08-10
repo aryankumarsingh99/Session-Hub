@@ -1,4 +1,4 @@
-// src/app/auth/login/page.js
+ 
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,8 +17,7 @@ export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  // Redirect if already authenticated
-  useEffect(() => {
+   useEffect(() => {
     if (isAuthenticated) {
       router.push('/dashboard');
     }
@@ -55,8 +54,7 @@ export default function LoginPage() {
       const result = await login(credentials);
       
       if (result.success) {
-        console.log('✅ Login successful, redirecting...');
-        router.push('/dashboard');
+         router.push('/dashboard');
       } else {
         setErrors({ submit: result.error });
       }
@@ -75,8 +73,7 @@ export default function LoginPage() {
       [name]: value
     }));
     
-    // Clear error when user starts typing
-    if (errors[name]) {
+     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
         [name]: ''
@@ -87,19 +84,16 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br bg-white flex items-center justify-center p-4">
       <div className="max-w-md w-full">
-        {/* Header */}
-        <div className="text-center mb-8">
+         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">SessionHub</h1>
           </Link>
           <p className="text-gray-600">Sign in to your account</p>
         </div>
 
-        {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
+         <div className="bg-white rounded-lg shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Submit Error */}
-            {errors.submit && (
+             {errors.submit && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -110,8 +104,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            {/* Email Field */}
-            <div>
+             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address
               </label>
@@ -132,8 +125,7 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Password Field */}
-            <div>
+             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
@@ -173,8 +165,7 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Submit Button */}
-            <button
+             <button
               type="submit"
               disabled={loading}
               className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
@@ -190,8 +181,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Links */}
-          <div className="mt-6 text-center space-y-4">
+           <div className="mt-6 text-center space-y-4">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
               <Link href="/auth/register" className="text-blue-600 hover:text-blue-500 font-medium">

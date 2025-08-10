@@ -1,4 +1,4 @@
-// src/app/api/auth/register/route.js
+ 
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
@@ -11,7 +11,7 @@ export async function POST(request) {
     const body = await request.json();
     const { email, password, firstName, lastName } = body;
 
-    // Validation
+ 
     if (!email || !password || !firstName || !lastName) {
       return NextResponse.json({
         success: false,
@@ -26,7 +26,7 @@ export async function POST(request) {
       }, { status: 400 });
     }
 
-    // Check if user already exists
+ 
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return NextResponse.json({
@@ -35,10 +35,10 @@ export async function POST(request) {
       }, { status: 409 });
     }
 
-    // Create new user
+ 
     const user = new User({
       email: email.toLowerCase(),
-      password_hash: password, // Will be hashed by pre-save hook
+      password_hash: password, 
       firstName: firstName.trim(),
       lastName: lastName.trim()
     });
@@ -73,18 +73,18 @@ export async function POST(request) {
       token
     }, { status: 201 });
 
-    // Set HTTP-only cookie
+ 
     response.cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 // 7 days
+      maxAge: 7 * 24 * 60 * 60  
     });
 
     return response;
 
   } catch (error) {
-    console.error('❌ Register: Error creating user:', error);
+    console.error(' Register: Error creating user:', error);
     
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map(err => err.message);

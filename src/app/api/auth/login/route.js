@@ -1,4 +1,4 @@
-// src/app/api/auth/login/route.js
+ 
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
@@ -11,7 +11,7 @@ export async function POST(request) {
     const body = await request.json();
     const { email, password } = body;
 
-    // Validation
+ 
     if (!email || !password) {
       return NextResponse.json({
         success: false,
@@ -19,7 +19,7 @@ export async function POST(request) {
       }, { status: 400 });
     }
 
-    // Find user
+ 
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return NextResponse.json({
@@ -28,7 +28,7 @@ export async function POST(request) {
       }, { status: 401 });
     }
 
-    // Check password
+ 
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
       return NextResponse.json({
@@ -37,14 +37,14 @@ export async function POST(request) {
       }, { status: 401 });
     }
 
-    // Generate JWT token
+    
     const token = generateToken({
       userId: user._id.toString(),
       email: user.email,
       role: user.role
     });
 
-    // Prepare user response
+ 
     const userResponse = {
       id: user._id.toString(),
       email: user.email,
@@ -56,7 +56,7 @@ export async function POST(request) {
       updated_at: user.updated_at.toISOString()
     };
 
-    console.log('✅ Login: User authenticated successfully:', user.email);
+    console.log(' Login: User authenticated successfully:', user.email);
 
     const response = NextResponse.json({
       success: true,
@@ -65,7 +65,7 @@ export async function POST(request) {
       token
     });
 
-    // Set HTTP-only cookie
+   
     response.cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -76,7 +76,7 @@ export async function POST(request) {
     return response;
 
   } catch (error) {
-    console.error('❌ Login: Authentication error:', error);
+    console.error(' Login: Authentication error:', error);
     return NextResponse.json({
       success: false,
       error: 'Internal server error'

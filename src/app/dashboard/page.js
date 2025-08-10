@@ -1,4 +1,4 @@
-// src/app/dashboard/page.js
+ 
 'use client';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -43,7 +43,7 @@ function DashboardContent() {
   const getStats = () => {
     return {
       totalSessions: sessions.length,
-      myPublished: 0, // Will be calculated from user sessions
+      myPublished: 0,  
       totalViews: sessions.reduce((sum, session) => sum + session.views, 0),
       avgViews: sessions.length > 0 ? Math.round(sessions.reduce((sum, session) => sum + session.views, 0) / sessions.length) : 0
     };
@@ -53,7 +53,7 @@ function DashboardContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -107,7 +107,7 @@ function DashboardContent() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Welcome back, {user?.firstName}! 👋
+            Welcome back, {user?.firstName}! 
           </h1>
           <p className="text-gray-600">
             Discover and explore wellness sessions from our community.
@@ -119,25 +119,25 @@ function DashboardContent() {
           <StatsCard 
             title="Total Sessions" 
             value={stats.totalSessions}
-            icon="📚"
+          
             color="blue" 
           />
           <StatsCard 
             title="Total Views" 
             value={stats.totalViews.toLocaleString()} 
-            icon="👁️"
+            
             color="green" 
           />
           <StatsCard 
             title="Average Views" 
             value={stats.avgViews} 
-            icon="📊"
+           
             color="purple" 
           />
           <StatsCard 
             title="My Published" 
             value={stats.myPublished} 
-            icon="✨"
+           
             color="orange" 
           />
         </div>
@@ -320,7 +320,7 @@ function SessionCard({ session }) {
   );
 }
 
-// Empty State Component
+ 
 function EmptyState({ searchTerm }) {
   return (
     <div className="text-center py-12">

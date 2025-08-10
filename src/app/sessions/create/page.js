@@ -1,4 +1,4 @@
-// src/app/sessions/create/page.js
+ 
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -18,7 +18,7 @@ export default function SessionCreate() {
   );
 }
 
-// Enhanced Session Editor Component
+ 
 function SessionEditor({ mode = 'create', sessionId = null }) {
   const { user, logout } = useAuth();
   const [sessionData, setSessionData] = useState({
@@ -36,18 +36,18 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
   const [lastSaved, setLastSaved] = useState(null);
   const router = useRouter();
 
-  // Auto-save timer
+ 
   useEffect(() => {
     if (mode === 'edit' || (sessionData.title || sessionData.description)) {
       const timer = setTimeout(() => {
         autoSave();
-      }, 5000); // Auto-save after 5 seconds of inactivity
+      }, 5000);  
 
       return () => clearTimeout(timer);
     }
   }, [sessionData]);
 
-  // Load session data if editing
+ 
   useEffect(() => {
     if (mode === 'edit' && sessionId) {
       loadSession();
@@ -157,7 +157,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
       
       if (data.success) {
         setLastSaved(new Date());
-        console.log('✅ Draft saved successfully');
+ 
         router.push('/my-sessions');
       } else {
         setErrors({ submit: data.error });
@@ -177,7 +177,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
       setPublishLoading(true);
       const token = localStorage.getItem('token');
       
-      // Save/update the session as published
+   
       const saveResponse = await fetch('/api/my-sessions', {
         method: 'POST',
         headers: {
@@ -194,7 +194,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
       const saveData = await saveResponse.json();
       
       if (saveData.success) {
-        console.log('✅ Session published successfully');
+        console.log(' Session published successfully');
         router.push('/my-sessions');
       } else {
         setErrors({ submit: saveData.error });
@@ -207,12 +207,12 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
     }
   };
 
-  // Enhanced tag handling - supports comma-separated input
+  
   const handleTagInput = (e) => {
     const value = e.target.value;
     setTagInput(value);
     
-    // Auto-add tags when user types comma
+   
     if (value.includes(',')) {
       const newTags = value.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag);
       addMultipleTags(newTags);
@@ -237,7 +237,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
     const input = tagInput.trim();
     if (!input) return;
     
-    // Handle comma-separated tags
+  
     if (input.includes(',')) {
       const newTags = input.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag);
       addMultipleTags(newTags);
@@ -359,10 +359,10 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
           )}
         </div>
 
-        {/* Form */}
+   
         <div className="bg-white rounded-lg shadow-sm border p-8">
           <form className="space-y-6">
-            {/* Submit Error */}
+      
             {errors.submit && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
                 <div className="flex items-center">
@@ -374,7 +374,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
               </div>
             )}
 
-            {/* Title Field */}
+       
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                 Session Title *
@@ -396,7 +396,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
               <p className="mt-1 text-sm text-gray-500">{sessionData.title.length}/200 characters</p>
             </div>
 
-            {/* Description Field (Optional) */}
+           
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
                 Description (Optional)
@@ -413,13 +413,13 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
               <p className="mt-1 text-sm text-gray-500">{sessionData.description.length}/1000 characters</p>
             </div>
 
-            {/* Enhanced Tags Field - Supports Comma-Separated Input */}
+        
             <div>
               <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-2">
                 Tags ({sessionData.tags.length}/10)
               </label>
               
-              {/* Display Current Tags */}
+        
               {sessionData.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-3">
                   {sessionData.tags.map((tag, index) => (
@@ -441,7 +441,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 </div>
               )}
               
-              {/* Tag Input */}
+              
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -462,7 +462,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 </button>
               </div>
               <p className="mt-1 text-sm text-gray-500">
-                💡 <strong>Tip:</strong> Type tags separated by commas for quick entry (e.g., "meditation, relaxation, stress relief")
+                 <strong>Tip:</strong> Type tags separated by commas for quick entry (e.g., "meditation, relaxation, stress relief")
               </p>
             </div>
 
@@ -485,7 +485,7 @@ function SessionEditor({ mode = 'create', sessionId = null }) {
                 <p className="mt-1 text-sm text-red-600">{errors.json_file_url}</p>
               )}
               <p className="mt-1 text-sm text-gray-500">
-                📁 Provide a publicly accessible URL to your session's JSON configuration file
+               Provide a publicly accessible URL to your session's JSON configuration file
               </p>
             </div>
 

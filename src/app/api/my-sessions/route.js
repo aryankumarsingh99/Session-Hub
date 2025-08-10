@@ -29,7 +29,7 @@ export async function GET(request) {
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '12');
 
-    // Build query
+   
     const query = { user_id: payload.userId };
     if (status !== 'all') {
       query.status = status;
@@ -37,7 +37,7 @@ export async function GET(request) {
 
     const skip = (page - 1) * limit;
 
-    // Get user's sessions
+  
     const [sessions, total] = await Promise.all([
       Session.find(query)
         .sort({ updated_at: -1 })
@@ -65,7 +65,7 @@ export async function GET(request) {
     });
 
   } catch (error) {
-    console.error('❌ My Sessions: Error fetching user sessions:', error);
+    console.error(' My Sessions: Error fetching user sessions:', error);
     return NextResponse.json({
       success: false,
       error: 'Failed to fetch sessions'
@@ -96,7 +96,7 @@ export async function POST(request) {
     const body = await request.json();
     const { title, description, tags, json_file_url, status = 'draft' } = body;
 
-    // Validation
+ 
     if (!title || !json_file_url) {
       return NextResponse.json({
         success: false,
@@ -104,7 +104,7 @@ export async function POST(request) {
       }, { status: 400 });
     }
 
-    // Create new session
+ 
     const session = new Session({
       user_id: payload.userId,
       title: title.trim(),
@@ -127,7 +127,7 @@ export async function POST(request) {
     }, { status: 201 });
 
   } catch (error) {
-    console.error('❌ My Sessions: Error creating session:', error);
+    console.error(' My Sessions: Error creating session:', error);
     
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map(err => err.message);

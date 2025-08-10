@@ -1,4 +1,4 @@
-// src/contexts/AuthContext.js
+ 
 'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
@@ -34,18 +34,18 @@ export const AuthProvider = ({ children }) => {
       if (token && savedUser) {
         const userData = JSON.parse(savedUser);
         
-        // Basic token validation
+     
         if (isValidToken(token)) {
           setUser(userData);
-          console.log('✅ AuthContext: User restored from localStorage:', userData.firstName);
+          console.log(' AuthContext: User restored from localStorage:', userData.firstName);
         } else {
-          console.log('⚠️ AuthContext: Token expired, clearing storage');
+          console.log(' AuthContext: Token expired, clearing storage');
           localStorage.removeItem('token');
           localStorage.removeItem('user');
         }
       }
     } catch (error) {
-      console.error('❌ AuthContext: Error parsing saved user:', error);
+      console.error('AuthContext: Error parsing saved user:', error);
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     } finally {
@@ -84,18 +84,18 @@ export const AuthProvider = ({ children }) => {
         console.log('✅ AuthContext: Login successful');
         return { success: true, message: data.message };
       } else {
-        console.log('❌ AuthContext: Login failed:', data.error);
+        console.log(' AuthContext: Login failed:', data.error);
         return { success: false, error: data.error };
       }
     } catch (error) {
-      console.error('❌ AuthContext: Login error:', error);
+      console.error(' AuthContext: Login error:', error);
       return { success: false, error: 'Network error. Please try again.' };
     }
   };
 
   const register = async (credentials) => {
     try {
-      console.log('📝 AuthContext: Registration attempt for:', credentials.email);
+      console.log('AuthContext: Registration attempt for:', credentials.email);
       
       const response = await fetch('/api/auth/register', {
         method: 'POST',
@@ -111,21 +111,21 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
-        console.log('✅ AuthContext: Registration successful');
+        console.log(' AuthContext: Registration successful');
         return { success: true, message: data.message };
       } else {
-        console.log('❌ AuthContext: Registration failed:', data.error);
+        console.log(' AuthContext: Registration failed:', data.error);
         return { success: false, error: data.error };
       }
     } catch (error) {
-      console.error('❌ AuthContext: Registration error:', error);
+      console.error(' AuthContext: Registration error:', error);
       return { success: false, error: 'Network error. Please try again.' };
     }
   };
 
   const logout = async () => {
     try {
-      console.log('🚪 AuthContext: Logging out...');
+      console.log(' AuthContext: Logging out...');
       
       await fetch('/api/auth/logout', { method: 'POST' });
       
@@ -136,8 +136,8 @@ export const AuthProvider = ({ children }) => {
       console.log('✅ AuthContext: Logout successful');
       window.location.href = '/auth/login';
     } catch (error) {
-      console.error('❌ AuthContext: Logout error:', error);
-      // Still clear local state even if API call fails
+      console.error(' AuthContext: Logout error:', error);
+ 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       setUser(null);

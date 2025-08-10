@@ -1,4 +1,4 @@
-// src/app/auth/register/page.js
+ 
 'use client';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -20,8 +20,7 @@ export default function RegisterPage() {
   const { register, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  // Redirect if already authenticated
-  useEffect(() => {
+   useEffect(() => {
     if (isAuthenticated) {
       router.push('/dashboard');
     }
@@ -75,8 +74,7 @@ export default function RegisterPage() {
       const result = await register(registrationData);
       
       if (result.success) {
-        console.log('✅ Registration successful, redirecting...');
-        router.push('/dashboard');
+         router.push('/dashboard');
       } else {
         setErrors({ submit: result.error });
       }
@@ -95,8 +93,7 @@ export default function RegisterPage() {
       [name]: value
     }));
     
-    // Clear error when user starts typing
-    if (errors[name]) {
+     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
         [name]: ''
@@ -115,11 +112,9 @@ export default function RegisterPage() {
           <p className="text-gray-600">Create your account</p>
         </div>
 
-        {/* Register Form */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
+         <div className="bg-white rounded-lg shadow-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Submit Error */}
-            {errors.submit && (
+             {errors.submit && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
                 <div className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -130,8 +125,7 @@ export default function RegisterPage() {
               </div>
             )}
 
-            {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
                   First Name
@@ -175,8 +169,7 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Email Field */}
-            <div>
+             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address
               </label>
@@ -197,8 +190,7 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Password Field */}
-            <div>
+             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
@@ -238,8 +230,7 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Confirm Password Field */}
-            <div>
+             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
                 Confirm Password
               </label>
@@ -260,8 +251,7 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Submit Button */}
-            <button
+             <button
               type="submit"
               disabled={loading}
               className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
@@ -277,8 +267,7 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          {/* Links */}
-          <div className="mt-6 text-center space-y-4">
+           <div className="mt-6 text-center space-y-4">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
               <Link href="/auth/login" className="text-blue-600 hover:text-blue-500 font-medium">

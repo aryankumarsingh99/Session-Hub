@@ -1,4 +1,4 @@
-// src/lib/jwt.js
+ 
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
@@ -26,13 +26,13 @@ export const verifyToken = (token) => {
 };
 
 export const extractTokenFromRequest = (request) => {
-  // Try to get token from Authorization header
+ 
   const authHeader = request.headers.get('authorization');
   if (authHeader && authHeader.startsWith('Bearer ')) {
     return authHeader.substring(7);
   }
 
-  // Try to get token from cookie
+ 
   const tokenFromCookie = request.cookies.get('token')?.value;
   if (tokenFromCookie) {
     return tokenFromCookie;
