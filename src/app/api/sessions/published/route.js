@@ -1,7 +1,8 @@
 // Create: src/app/api/sessions/published/route.js
 import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/dbConnect';
+ import dbConnect from '@/lib/mongodb';
 import Session from '@/models/Session';
+ 
 
 export async function GET(request) {
   try {
