@@ -1,72 +1,75 @@
 // Create: src/app/api/sessions/published/route.js
 import { NextResponse } from 'next/server';
- import dbConnect from '@/lib/mongodb';
+import dbConnect from '@/lib/mongodb'; // ✅ Correct import
 import Session from '@/models/Session';
- 
 
 export async function GET(request) {
   try {
     await dbConnect();
     
     const { searchParams } = new URL(request.url);
-    const sortBy = searchParams.get('sortBy') || 'newest';
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '12');
     
-    // Only fetch published sessions
-    let query = Session.find({ 
-      status: 'published' 
-    }).populate('user_id', 'firstName lastName');
+    const skip = (page - 1) * limit;
     
-    // Apply sorting
-    switch (sortBy) {
-      case 'oldest':
-        query = query.sort({ created_at: 1 });
-        break;
-      case 'views':
-        query = query.sort({ views: -1 });
-        break;
-      case 'title':
-        query = query.sort({ title: 1 });
-        break;
-      case 'newest':
-      default:
-        query = query.sort({ created_at: -1 });
-        break;
-    }
+    console.log('🔍 Fetching published sessions:', { page, limit });
     
-    const sessions = await query.exec();
+    // Fetch only published sessions
+    const [sessions, total] = await Promise.all([
+      Session.find({ status: 'published' })
+        .populate('user_id', 'firstName lastName avatar')
+        .sort({ published_at: -1, created_at: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Session.countDocuments({ status: 'published' })
+    ]);
     
-    // Transform data to match your frontend expectations
+    // Format sessions for frontend
     const formattedSessions = sessions.map(session => ({
-      _id: session._id,
-      title: session.title,
-      description: session.description,
-      tags: session.tags || [],
-      views: session.views,
-      status: session.status,
-      author: {
-        firstName: session.user_id?.firstName || 'Unknown',
-        lastName: session.user_id?.lastName || 'User'
+      ...session,
+      id: session._id.toString(),
+      _id: session._id.toString(),
+      user_id: session.user_id ? {
+        id: session.user_id._id.toString(),
+        firstName: session.user_id.firstName,
+        lastName: session.user_id.lastName,
+        avatar: session.user_id.avatar
+      } : null,
+      author: session.user_id ? {
+        name: `${session.user_id.firstName} ${session.user_id.lastName}`,
+        firstName: session.user_id.firstName,
+        lastName: session.user_id.lastName,
+        avatar: session.user_id.avatar
+      } : {
+        name: 'Unknown User',
+        firstName: 'Unknown',
+        lastName: 'User'
       },
-      createdAt: session.created_at,
-      duration: 30 // Default duration, update based on your schema
+      views: session.views || 0,
+      likes: session.likes || 0,
+      tags: session.tags || []
     }));
     
     return NextResponse.json({
       success: true,
       sessions: formattedSessions,
-      message: 'Published sessions fetched successfully'
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.ceil(total / limit),
+        hasNext: page * limit < total,
+        hasPrev: page > 1
+      }
     });
-
-  } catch (error) {
-    console.error('Error fetching published sessions:', error);
     
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Failed to fetch published sessions',
-        sessions: []
-      },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error('❌ Published Sessions API Error:', error);
+    return NextResponse.json({
+      success: false,
+      error: 'Failed to fetch published sessions'
+    }, { status: 500 });
   }
 }
